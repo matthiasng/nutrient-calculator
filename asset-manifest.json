@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/nutrient-calculator/static/css/main.24fcd3dc.css",
-    "main.js": "/nutrient-calculator/static/js/main.78d4e6cd.js",
+    "main.js": "/nutrient-calculator/static/js/main.dc408e78.js",
     "static/js/453.3eb36005.chunk.js": "/nutrient-calculator/static/js/453.3eb36005.chunk.js",
     "static/media/roboto-latin-700-normal.woff2": "/nutrient-calculator/static/media/roboto-latin-700-normal.4535474e1cf8598695ad.woff2",
     "static/media/roboto-latin-500-normal.woff2": "/nutrient-calculator/static/media/roboto-latin-500-normal.7077203b1982951ecf76.woff2",
@@ -61,11 +61,11 @@
     "static/media/roboto-greek-ext-400-normal.woff": "/nutrient-calculator/static/media/roboto-greek-ext-400-normal.16eb83b4a3b1ea994243.woff",
     "index.html": "/nutrient-calculator/index.html",
     "main.24fcd3dc.css.map": "/nutrient-calculator/static/css/main.24fcd3dc.css.map",
-    "main.78d4e6cd.js.map": "/nutrient-calculator/static/js/main.78d4e6cd.js.map",
+    "main.dc408e78.js.map": "/nutrient-calculator/static/js/main.dc408e78.js.map",
     "453.3eb36005.chunk.js.map": "/nutrient-calculator/static/js/453.3eb36005.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.24fcd3dc.css",
-    "static/js/main.78d4e6cd.js"
+    "static/js/main.dc408e78.js"
   ]
 }
