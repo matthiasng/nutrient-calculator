@@ -125,6 +125,7 @@ function App() {
           </Grid>
           <Grid size={12}>
             <Divider />
+            <h3>Optimal Values</h3>
           </Grid>
           <Grid size={4}>
             <FormControl fullWidth>
