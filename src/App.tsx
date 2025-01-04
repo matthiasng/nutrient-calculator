@@ -159,7 +159,7 @@ function App() {
                 <TableBody>
                   <TableRow>
                     <TableCell>{plant.optimalPhFrom}-{plant.optimalPhTo} pH</TableCell>
-                    <TableCell>{plant.optimalEcFrom}-{plant.optimalEcFrom} u/S</TableCell>
+                    <TableCell>{plant.optimalEcFrom}-{plant.optimalEcTo} u/S</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
