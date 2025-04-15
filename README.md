@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Terra Aquatic TriPart nutrient calculator
 
 [Open calculator](https://matthiasng.github.io/nutrient-calculator/)
 

@@ -25,6 +25,11 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 
+function formatNutrientAmount(amount: number): string {
+  const rounded = Math.round(amount * 100) / 100;
+  return rounded === 0 ? '-' : rounded.toString() + " ml";
+}
+
 function App() {
   const [mixtureStrength, setMixtureStrength] = useLocalStorage('mixture_strength', 100);
   const [liters, setLiters] = useLocalStorage('liters', 1);
@@ -97,11 +102,11 @@ function App() {
                   {nutrientSchema.ingredients.map((row) => (
                     <TableRow key={row.name} sx={{ 'background-color': row.color }}>
                       <TableCell><b>{row.name}</b></TableCell>
-                      <TableCell align="right">{Math.round(row.firstRoots * liters * (mixtureStrength / 100) * 100) / 100} ml</TableCell>
-                      <TableCell align="right">{Math.round(row.firstTrueLeafes * liters * (mixtureStrength / 100) * 100) / 100} ml</TableCell>
-                      <TableCell align="right">{Math.round(row.growing * liters * (mixtureStrength / 100) * 100) / 100} ml</TableCell>
-                      <TableCell align="right">{Math.round(row.preFlowering * liters * (mixtureStrength / 100) * 100) / 100} ml</TableCell>
-                      <TableCell align="right">{Math.round(row.flowering * liters * (mixtureStrength / 100) * 100) / 100} ml</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.firstRoots * liters * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.firstTrueLeafes * liters * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.growing * liters * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.preFlowering * liters * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.flowering * liters * (mixtureStrength / 100))}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

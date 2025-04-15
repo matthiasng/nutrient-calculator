@@ -1,5 +1,5 @@
 
-import { blue, green, grey, pink, purple, red } from '@mui/material/colors';
+import { blue, green, lightGreen, grey, pink, purple, red } from '@mui/material/colors';
 
 export interface NutrientSchema {
     ingredients: NutrientSchemaIngredient[]
@@ -28,10 +28,11 @@ export interface NutrientSchemaEC {
 
 export const nutrientSchema: NutrientSchema = {
     ingredients: [
-        { name: "CalMag", firstRoots: 2, firstTrueLeafes: 2, growing: 2, preFlowering: 2, flowering: 2, color: blue["600"] },
-        { name: "Grow", firstRoots: 0.5, firstTrueLeafes: 1, growing: 1.8, preFlowering: 2, flowering: 0.8, color: green["600"] },
-        { name: "Micro", firstRoots: 0.5, firstTrueLeafes: 1, growing: 1.2, preFlowering: 2, flowering: 1.6, color: purple["600"] },
-        { name: "Bloom", firstRoots: 0.5, firstTrueLeafes: 1, growing: 0.6, preFlowering: 1.5, flowering: 2.4, color: pink["600"] },
+        { name: "CalMag", firstRoots: 2, firstTrueLeafes: 2, growing: 2, preFlowering: 2, flowering: 2, color: blue["700"] },
+        { name: "Grow", firstRoots: 0.5, firstTrueLeafes: 1, growing: 1.8, preFlowering: 2, flowering: 0.8, color: green["700"] },
+        { name: "Micro", firstRoots: 0.5, firstTrueLeafes: 1, growing: 1.2, preFlowering: 2, flowering: 1.6, color: purple["700"] },
+        { name: "Bloom", firstRoots: 0.5, firstTrueLeafes: 1, growing: 0.6, preFlowering: 1.5, flowering: 2.4, color: pink["700"] },
+        { name: "Pro Roots", firstRoots: 0.2, firstTrueLeafes: 0.2, growing: 0, preFlowering: 0, flowering: 0, color: lightGreen["900"] },
     ],
     ec: { name: "EC", firstRoots: "0,3-0,6", firstTrueLeafes: "0,8-1,2", growing: "1,3-1,8", preFlowering: "1,8-2,0", flowering: "1,4-2,2", color: grey["600"] }
 };
