@@ -32,7 +32,8 @@ function formatNutrientAmount(amount: number): string {
 
 function App() {
   const [mixtureStrength, setMixtureStrength] = useLocalStorage('mixture_strength', 100);
-  const [liters, setLiters] = useLocalStorage('liters', 1);
+  const [amount, setAmount] = useLocalStorage('amount', 1);
+  const [unit, setUnit] = useLocalStorage<'L' | 'ML'>('unit', 'L');
   const [plant, setPlant] = useLocalStorage<Plant>('plant', plants[0], {
     serializer: (p) => {
       return p.name;
@@ -48,18 +49,29 @@ function App() {
     setPlant(p === undefined ? plants[0] : p);
   }
 
+  const handleUnitChange = (event: any) => {
+    const newUnit = event.target.value as 'L' | 'ML';
+    if (unit === newUnit) return;
+    if (newUnit === 'L') {
+      setAmount(prev => prev / 1000);
+    } else {
+      setAmount(prev => prev * 1000);
+    }
+    setUnit(newUnit);
+  };
+
   return (
     <Container maxWidth="lg">
       <Box sx={{ my: 4 }}>
         <Grid container spacing={2}>
-          <Grid size={2}>
+          <Grid size="grow">
             <FormControl fullWidth>
               <TextField
-                id="liters-text"
-                label="Liter"
+                id="amount-text"
+                label={unit === 'L' ? 'Liter' : 'Milliliter'}
                 type="number"
-                value={liters}
-                onChange={(event) => setLiters(parseInt(event.target.value))}
+                value={amount}
+                onChange={(event) => setAmount(parseFloat(event.target.value))}
                 slotProps={{
                   inputLabel: {
                     shrink: true,
@@ -68,7 +80,22 @@ function App() {
               />
             </FormControl>
           </Grid>
-          <Grid size={10}>
+          <Grid sx={{ width: '6em' }}>
+            <FormControl fullWidth>
+              <InputLabel id="unit-select-label">Unit</InputLabel>
+              <Select
+                labelId="unit-select-label"
+                id="unit-select"
+                value={unit}
+                label="Unit"
+                onChange={handleUnitChange}
+              >
+                <MenuItem value="L">L</MenuItem>
+                <MenuItem value="ML">ML</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid size={12}>
             <Typography id="non-linear-slider">
               Mixture Strength: {mixtureStrength} %
             </Typography>
@@ -100,23 +127,19 @@ function App() {
                 </TableHead>
                 <TableBody>
                   {nutrientSchema.ingredients.map((row) => (
-                    <TableRow key={row.name} sx={{ 'background-color': row.color }}>
+                    <TableRow key={row.name} sx={{ 'backgroundColor': row.color }}>
                       <TableCell><b>{row.name}</b></TableCell>
-                      <TableCell align="right">{formatNutrientAmount(row.firstRoots * liters * (mixtureStrength / 100))}</TableCell>
-                      <TableCell align="right">{formatNutrientAmount(row.firstTrueLeafes * liters * (mixtureStrength / 100))}</TableCell>
-                      <TableCell align="right">{formatNutrientAmount(row.growing * liters * (mixtureStrength / 100))}</TableCell>
-                      <TableCell align="right">{formatNutrientAmount(row.preFlowering * liters * (mixtureStrength / 100))}</TableCell>
-                      <TableCell align="right">{formatNutrientAmount(row.flowering * liters * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.firstRoots * (unit === 'L' ? amount : amount / 1000) * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.firstTrueLeafes * (unit === 'L' ? amount : amount / 1000) * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.growing * (unit === 'L' ? amount : amount / 1000) * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.preFlowering * (unit === 'L' ? amount : amount / 1000) * (mixtureStrength / 100))}</TableCell>
+                      <TableCell align="right">{formatNutrientAmount(row.flowering * (unit === 'L' ? amount : amount / 1000) * (mixtureStrength / 100))}</TableCell>
                     </TableRow>
                   ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Box sx={{ pt: 2 }} />
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 550 }}>
-                <TableBody>
-                  <TableRow key={nutrientSchema.ec.name} sx={{ 'background-color': nutrientSchema.ec.color }}>
+                  <TableRow>
+                    <TableCell colSpan={6} sx={{ padding: '2px 0' }}></TableCell>
+                  </TableRow>
+                  <TableRow key={nutrientSchema.ec.name} sx={{ 'backgroundColor': nutrientSchema.ec.color }}>
                     <TableCell><b>{nutrientSchema.ec.name}</b></TableCell>
                     <TableCell align="right">{nutrientSchema.ec.firstRoots}</TableCell>
                     <TableCell align="right">{nutrientSchema.ec.firstTrueLeafes}</TableCell>
@@ -143,7 +166,7 @@ function App() {
                 onChange={(event) => selectPlant(event.target.value)}
               >
                 {plants.map((plant) => (
-                  <MenuItem value={plant.name}>{plant.name}</MenuItem>
+                  <MenuItem key={plant.name} value={plant.name}>{plant.name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
